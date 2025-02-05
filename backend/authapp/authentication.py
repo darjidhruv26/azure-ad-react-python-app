@@ -1,13 +1,11 @@
-from rest_framework.authentication import BaseAuthentication
-from django.contrib.auth.models import User
-import jwt
 import requests
 import os
-import requests
 from dotenv import load_dotenv
-from django.conf import settings
+from rest_framework.authentication import BaseAuthentication
+import jwt
+from django.contrib.auth.models import User
+from authapp.models import UserToken
 from datetime import datetime
-from authapp.models import UserToken 
 
 load_dotenv()
 
@@ -136,3 +134,23 @@ class AzureADAuthentication(BaseAuthentication):
             return True, user_token
         except UserToken.DoesNotExist:
             return False, None
+
+    def request_access_token(self):
+        """
+        Request an access token from Azure AD using client credentials.
+        """
+        url = f"https://login.microsoftonline.com/{os.getenv('AZURE_AD_TENANT_ID')}/oauth2/v2.0/token"
+        headers = {
+            "Content-Type": "application/x-www-form-urlencoded"
+        }
+
+        body = {
+            "grant_type": "client_credentials",
+            "client_id": os.getenv("AZURE_AD_CLIENT_ID"),
+            "client_secret": os.getenv("AZURE_AD_CLIENT_SECRET"),
+            "scope": "https://graph.microsoft.com/.default"
+        }
+
+        response = requests.post(url, headers=headers, data=body)
+        response.raise_for_status()
+        return response.json().get("access_token")
