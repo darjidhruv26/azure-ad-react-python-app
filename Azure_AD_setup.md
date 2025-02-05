@@ -172,6 +172,3 @@ Or if there is no option of Token Configuration then click on `Manifest`
 ```
 
 ![image](https://github.com/user-attachments/assets/3b7dc018-b617-4384-a4fb-fd33d0eaafbc)
-
-
-
