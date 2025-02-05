@@ -14,7 +14,7 @@ class DashboardView(APIView):
             "username": user.username,
             "email": user.email if user.email else "Not Available",
             "full_name": user.first_name if user.first_name else "Not Available",
-            "message": f"Welcome, {user.username}!"
+            "message": f"Welcome, {user.first_name}!"
         })
 
 class UserLogout(APIView):

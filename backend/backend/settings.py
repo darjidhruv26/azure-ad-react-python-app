@@ -95,7 +95,7 @@ REST_FRAMEWORK = {
 AUTH_ADFS = {
     "SERVER": os.getenv('AUTH_ADFS_SERVER'),
     "CLIENT_ID": os.getenv('AUTH_ADFS_CLIENT_ID'),
-    "AUDIENCE": os.getenv('AUTH_ADFS_AUDIENCE'),
+    "AUDIENCE": os.getenv('AUTH_ADFS_CLIENT_ID'),
     "ISSUER": os.getenv('AUTH_ADFS_ISSUER'),
     "CA_BUNDLE": False,
 }

@@ -146,7 +146,7 @@ class AzureADAuthentication(BaseAuthentication):
 
         body = {
             "grant_type": "client_credentials",
-            "client_id": os.getenv("AZURE_AD_CLIENT_ID"),
+            "client_id": os.getenv("AUTH_ADFS_CLIENT_ID"),
             "client_secret": os.getenv("AZURE_AD_CLIENT_SECRET"),
             "scope": "https://graph.microsoft.com/.default"
         }
